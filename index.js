@@ -5,7 +5,7 @@ const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
 const allowedOrigins = [
-    'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app',
+    'https://socail-app-frontend.vercel.app/',
     // Add any other allowed origins here
   ];
 const corsOptions = {
