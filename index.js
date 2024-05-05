@@ -3,7 +3,12 @@ const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
-app.use(cors())
+const corsOptions = {
+    origin: 'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app/', // Replace with your React app's URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+};
+app.use(cors(corsOptions))
 app.use(express.json())
 const mongoose = require('mongoose')
 
