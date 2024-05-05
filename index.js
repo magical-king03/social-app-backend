@@ -55,6 +55,7 @@ app.post('/save', async (req, res) => {
 })
 
 app.get('/api-users', async (req, res) => {
+    res.json("api-users")
     let users = await User.find()
     res.json(users)
 })
