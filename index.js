@@ -6,18 +6,16 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
 const allowedOrigins = [
     'https://socail-app-frontend.vercel.app/',
-    // Add any other allowed origins here
-  ];
+];
 const corsOptions = {
     origin: function (origin, callback) {
-      // Check if the request origin is in the allowed list
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
-  };
+};
 app.use(cors(corsOptions))
 app.use(express.json())
 const mongoose = require('mongoose')
@@ -68,6 +66,7 @@ app.post('/save', async (req, res) => {
     res.send(result)
 })
 
+// This route generates all the details present in the mongo db database
 app.get('/api-users', async (req, res) => {
     let users = await User.find()
     res.json(users)
@@ -85,7 +84,7 @@ app.post('/update', async (req, res) => {
                 coverPic: coverPic,
                 gender: gender,
                 dateOfBirth: dateOfBirth,
-                hobby: hobby, 
+                hobby: hobby,
             }
         })
     res.send(data)
