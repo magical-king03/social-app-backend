@@ -4,19 +4,12 @@ require('dotenv').config();
 const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
-const allowedOrigins = [
-    'https://socail-app-frontend.vercel.app',
-];
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-};
-app.use(cors(corsOptions))
+app.use(cors({
+    origin: 'https://socail-app-frontend.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed HTTP methods
+    credentials: true, // Enable CORS credentials if needed
+}));
+// app.use(cors(corsOptions))
 app.use(express.json())
 const mongoose = require('mongoose')
 
@@ -66,7 +59,7 @@ app.post('/save', async (req, res) => {
     res.send(result)
 })
 
-// This route generates all the details present in the mongo db database
+// This route is to fetch all the user data and store it in users
 app.get('/api-users', async (req, res) => {
     let users = await User.find()
     res.json(users)
