@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors')
+require('dotenv').config();
 const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -13,7 +14,7 @@ app.use(express.json())
 const mongoose = require('mongoose')
 
 try {
-    mongoose.connect('mongodb+srv://visweish:visweish03@cluster0.30sjeoa.mongodb.net/?retryWrites=true&w=majority');
+    mongoose.connect(process.env.MONGO_DB);
     console.log('MongoDB connected!!!')
 } catch (e) {
     console.log('MongoDB connection error: ', e)
@@ -33,6 +34,10 @@ const User = mongoose.model('users', userSchema)
 
 app.get('/', async (req, res) => {
     res.json("Backend work")
+})
+
+app.get('/home', async (req, res) => {
+    res.json("home")
 })
 
 app.post('/save', async (req, res) => {
