@@ -5,7 +5,7 @@ const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
 const allowedOrigins = [
-    'https://socail-app-frontend.vercel.app/',
+    'https://socail-app-frontend.vercel.app',
 ];
 const corsOptions = {
     origin: function (origin, callback) {
