@@ -5,7 +5,7 @@ const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
 const corsOptions = {
-    origin: 'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app/', // Replace with your React app's URL
+    origin: 'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app', // Replace with your React app's URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 };
@@ -14,7 +14,7 @@ app.use(express.json())
 const mongoose = require('mongoose')
 
 try {
-    mongoose.connect(process.env.MONGO_DB);
+    mongoose.connect('mongodb+srv://visweish:visweish03@cluster0.30sjeoa.mongodb.net/?retryWrites=true&w=majority');
     console.log('MongoDB connected!!!')
 } catch (e) {
     console.log('MongoDB connection error: ', e)
@@ -60,8 +60,8 @@ app.post('/save', async (req, res) => {
 })
 
 app.get('/api-users', async (req, res) => {
-    res.json("api-users")
     let users = await User.find()
+    res.json("api-users")
     res.json(users)
 })
 
