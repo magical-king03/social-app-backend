@@ -4,11 +4,20 @@ require('dotenv').config();
 const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' }));
+const allowedOrigins = [
+    'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app',
+    // Add any other allowed origins here
+  ];
 const corsOptions = {
-    origin: 'https://socail-app-frontend-nqxas68mo-magicalking03s-projects.vercel.app', // Replace with your React app's URL
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-};
+    origin: function (origin, callback) {
+      // Check if the request origin is in the allowed list
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  };
 app.use(cors(corsOptions))
 app.use(express.json())
 const mongoose = require('mongoose')
