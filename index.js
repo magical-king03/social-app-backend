@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 })
 const User = mongoose.model('users', userSchema)
 
-app.post('/', async (req, res) => {
+app.get('/', async (req, res) => {
     res.json("Backend work")
 })
 
