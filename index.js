@@ -61,7 +61,6 @@ app.post('/save', async (req, res) => {
 
 app.get('/api-users', async (req, res) => {
     let users = await User.find()
-    res.json("api-users")
     res.json(users)
 })
 
